@@ -7,10 +7,15 @@ import {EventThumbnailComponent} from './events/event-thumbnail.component';
 import {NavbarComponent} from './nav/navbar.component';
 import {EventExampleComponent} from './events/event-example.component';
 import {EventsExampleChildComponent} from './events/events-example-child.component';
+import {EventService} from './events/shared/event.service';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   declarations: [
     EventsAppComponent,
@@ -20,6 +25,7 @@ import {EventsExampleChildComponent} from './events/events-example-child.compone
     EventExampleComponent,
     EventsExampleChildComponent
   ],
+  providers: [EventService],
   bootstrap: [EventsAppComponent]
 })
 export class AppModule {

@@ -9,6 +9,10 @@ Scalable and Modular Architecture for CSS - [smacss](http://smacss.com/book/type
 Installed the following:
  ngf-bootstratp `npm install ngf-bootstrap --save`.
 
+### ngx-toastr
+
+[Toastr](https://github.com/scttcper/ngx-toastr) is a component for showing messages for operations according personal implementation. It was installed ngx-toastr by the command in CLI `npm i ngx-toastr -s` and applied to event stack to show the message after operations. Differently of what was shown in the video in Pluralsight that has an older version, it is necessary to import it in style.scss to make it available for the whole application, also in the app.modules importing ToastModule, then after add to employee.components.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
