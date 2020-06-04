@@ -2,7 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
 
-## Technologies used in this project
+## Technologies and technics used in this project
+
+Scalable and Modular Architecture for CSS - [smacss](http://smacss.com/book/type-layout) is used by Angular when run the code and if we inspect it we see it structured according to this pattern, that is how it treat and target element from a component.
 
 Installed the following:
  ngf-bootstratp `npm install ngf-bootstrap --save`.
