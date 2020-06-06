@@ -1,9 +1,19 @@
 import {Injectable} from '@angular/core';
+import {Subject} from 'rxjs';
 
 @Injectable() // not required here, just when inject other services as dependencies of its own, like http within the constructor
 export class EventService {
   getEvents() {
-    return eventList;
+    const subject = new Subject(); // Rx observable to make this method act like asynchronous
+    setTimeout(() =>        // simulate async
+    {
+      subject.next(eventList);
+      subject.complete(); },
+      // 2000 ---> time used to simulate a big delay in a data delievery
+      100
+    );
+
+    return subject;
   }
 
   getEvent(id: number) {
