@@ -13,6 +13,10 @@ Installed the following:
 
 [Toastr](https://github.com/scttcper/ngx-toastr) is a component for showing messages for operations according personal implementation. It was installed ngx-toastr by the command in CLI `npm i ngx-toastr -s` and applied to event stack to show the message after operations. Differently of what was shown in the video in Pluralsight that has an older version, it is necessary to import it in style.scss to make it available for the whole application, also in the app.modules importing ToastModule, then after add to employee.components.
 
+### 404 page with guard (CanActivate)
+
+After creating file for 404, declaring it in app-module and creating a route, a file has to be created for Event Route Activator, that needs to be add into app-module also in providers. Finally, put canActivate in the route path that wants to prevent the access, in this case, lauch 404 page when type a id that not exist typing in the address bar.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
