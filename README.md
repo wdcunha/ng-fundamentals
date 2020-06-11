@@ -53,9 +53,21 @@ Validation in the html page is possible from the loginForm variable. To understa
   {{'loginForm.controls.userName.dirty: ' + loginForm.controls.userName.dirty}}<br/>
   {{'loginForm.controls.userName.pristine: ' + loginForm.controls.userName.pristine}}<br/>
   {{'loginForm.controls.userName.touched: ' + loginForm.controls.userName.touched}}<br/>
-  {{'loginForm.controls.userName.untouched: ' + loginForm.controls.userName.untouched}}<br/>
-`
+  {{'loginForm.controls.userName.untouched: ' + loginForm.controls.userName.untouched}}<br/>`
+  
 Taking advantage of this properties, it is possible to disable the button submit using Angular property [disable] when loginForm is invalid (loginForm.invalid). Also, the fields validation error message are just launched when 'touched' and button submit has mouseoverLogin property in (mouseenter) and (mouseleave) to trigger message when the user pass mouse over that button. 
+
+## Model-driven Form ([edit profile page](src/app/user/profile.component.ts))
+
+This is another way to make form validation and it happens in the component, where is defined fields and validations and them they are wired up to fiels in HTML. This approach are known as Reactive Form too, which requires more extra code, but there's some advantages, for instance the option of building the form and its validation more dynamically based on decisions made in the code. Another great benefit is that  it makes all of the validation logic unit testable.
+
+The properties created in the component is them wired up in the HTML by [formGroup] pointing to the profileForm property created within the component.
+
+Model-driven Form or Reactive forms use a different module than template-driven forms, ReactiveFormsModule, and it has to be declared in the user.module as well.
+
+In order to wire up the current user to the profile fields, it is necessary first to import and declare authService in the constructor, so the current user can be caught and then be passed into FormControls as parameter.
+
+Save button requires to create a updateCurrentUser method to point and take changes to auth.service 
 
 ## Development server
 
