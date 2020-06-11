@@ -67,7 +67,7 @@ Model-driven Form or Reactive forms use a different module than template-driven 
 
 In order to wire up the current user to the profile fields, it is necessary first to import and declare authService in the constructor, so the current user can be caught and then be passed into FormControls as parameter.
 
-Save button requires to create a updateCurrentUser method to point and take changes to auth.service 
+Save button requires to create a updateCurrentUser method to point and take changes to auth.service.
 
 ## Development server
 
