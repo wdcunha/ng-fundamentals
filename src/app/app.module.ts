@@ -18,6 +18,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
 import {RoutesModule} from '../routes';
 import {Error404Component} from './errors/404.components';
+import {UserModule} from './user/user.module';
+import {AuthService} from './user/auth.service';
 
 @NgModule({
   imports: [
@@ -25,7 +27,8 @@ import {Error404Component} from './errors/404.components';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     RouterModule,
-    RoutesModule
+    RoutesModule,
+    UserModule
   ],
   declarations: [
     EventsAppComponent,
@@ -42,6 +45,7 @@ import {Error404Component} from './errors/404.components';
     EventService,
     EventRouteActivatorService,
     EventListResolverService,
+    AuthService,
     { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState }
   ],
   bootstrap: [EventsAppComponent]

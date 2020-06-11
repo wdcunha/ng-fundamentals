@@ -23,6 +23,40 @@ It was add in order to make data being load async that is more realistic and to 
 
 After implemented this file, it was added to [app-module](src/app/app.module.ts), within providers. It was added the resolver handler to the [route](src/routes.ts) in the EventsListComponent route line with an object that has a property value. This means that always before routing, call the EventListResolverService and when it is finished with some data returned, add data to the route as a property named events. In order to consume it, it is necessary to substitute the code within ngOnInit from the [component](src/app/events/events-list.component.ts) to receive the data passed by the route, using the property events. All this implementation at end allows to load the event content after all data is ready, even the page title, without the need to wait the data to be loaded in the resolver and then load it again in that component.
 
+## Forms
+
+There are two options when creating form, template-based or model-based(called reactive forms). Template-based allows to build completely in HTML template, simple and easy, it works great for simple uses cases, but it has some limitations like when applied to complex forms, with a lot of logic, things like cross fiel validation are more difficult. Unit test is another limitation, so it's not possible  to use it in all form and validation logic. Model-based allow to build form and put a lot of logic in the component.
+
+[(NgModel)] (two way binding that is called banana) gives some extra forms-related functionality that can be used instead of simple (input) data binding which allows to be declared in a shortly way, saving to remember everywhere it is used. It is commonly used when the field edits existing data and as it is typed in the field, data is updated in the component. When there's no this need, it is enough to have one-way data binding (ngModel) and when using it, remember to declare it on the component. Another thing that handle extra things is (ngSubmit) like preventing the form from submitting to the server. It can receive just the data that is interesting and not all data that is available in the form, using the variable name dot value (loginForm.value), and in the method within the component, retrieve the form data the same way (formValues.username and formValues.password).
+
+## Auth component
+
+This component will check the current user, that has user model to format data related to it. LoginUser method was created to make a call to the server and log the user in, then set this currentUser property. Auth.service was registered as a provider, but in the app.module because it will also be used in components and providers are shared across Angular modules, so eliminating the need to declare many times, being enough to do in the main module. It is not the same for imports and declarations, which demand us to declarate in whichever modules need them.
+
+AuthService will be responsible to take the values form and to make it available to the app.
+
+Login component is responsible to redirect after authentication is done or canceled.
+
+Validation in the html page is possible from the loginForm variable. To understand how it works, there's some methods that can be used as shown below. When clicked on username field, the touched property changes to true and when types something in there a buch of these values changed, like username.valid is true right after. 
+
+`
+  {{'loginForm.valid: ' + loginForm.valid}}<br/>
+  {{'loginForm.valid: ' + loginForm.invalid}}<br/>
+  {{'loginForm.valid: ' + loginForm.dirty}}<br/>
+  {{'loginForm.valid: ' + loginForm.pristine}}<br/>
+  {{'loginForm.valid: ' + loginForm.submitted}}<br/>
+  {{'loginForm.valid: ' + loginForm.touched}}<br/>
+  {{'loginForm.valid: ' + loginForm.untouched}}<br/>
+
+  {{'loginForm.controls.userName.valid: ' + loginForm.controls.userName.valid}}<br/>
+  {{'loginForm.controls.userName.invalid: ' + loginForm.controls.userName.invalid}}<br/>
+  {{'loginForm.controls.userName.dirty: ' + loginForm.controls.userName.dirty}}<br/>
+  {{'loginForm.controls.userName.pristine: ' + loginForm.controls.userName.pristine}}<br/>
+  {{'loginForm.controls.userName.touched: ' + loginForm.controls.userName.touched}}<br/>
+  {{'loginForm.controls.userName.untouched: ' + loginForm.controls.userName.untouched}}<br/>
+`
+Taking advantage of this properties, it is possible to disable the button submit using Angular property [disable] when loginForm is invalid (loginForm.invalid). Also, the fields validation error message are just launched when 'touched' and button submit has mouseoverLogin property in (mouseenter) and (mouseleave) to trigger message when the user pass mouse over that button. 
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
