@@ -69,6 +69,8 @@ In order to wire up the current user to the profile fields, it is necessary firs
 
 Save button requires to create a updateCurrentUser method to point and take changes to auth.service.
 
+The expression `&& profileForm.controls.firstName.errors` was used because there are two validators in firstName and both would be shown and this is a solution to the first validation, because it sets true when there is a required error and `&& profileForm.controls.firstName.errors.pattern` is used to the validation about if the user typed number or letter for the first character. For more about [Validators](https://angular.io/api/forms/Validators).
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
