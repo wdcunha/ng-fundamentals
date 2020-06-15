@@ -15,7 +15,7 @@ Installed the following:
 
 ### Rout guard (CanActivate)
 
-Firt it was created for 404 error page. After created a file for 404, declaring it in app-module and creating a route, a file has to be created for [Event Route Activator](src/app/events/event-details/event-route-activator.service.ts), that needs to be add into  [app-module](src/app/app.module.ts), also in providers. Finally, put canActivate in the route path that wants to prevent the access or to reroute, in this case, launch 404 page when type a id that not exist typing in the address bar, then it was put in the Event Detail route line. It was add too a CanDeactivate to Create Event route line to prevent to cancel the create process when clicking in the button. It was used as string value to be grabbed by the provide and used by the function added within  [app-module](src/app/app.module.ts) called `checkDirtyState()`. Also it was created a variable to be checked if is to be canceled (isDirty).
+Firt it was created for 404 error page. After created a file for 404, declaring it in app-module and creating a route, a file has to be created for [Event Route Activator](src/app/events/event-details/event-route-activator.service.ts), that needs to be add into  [app-module](src/app/app.module.ts), also in providers. Finally, put canActivate in the route path that wants to prevent the access or to reroute, in this case, launch 404 page when type a id that not exist typing in the address bar, then it was put in the Event Detail route line. It was add too a CanDeactivate to Create Event route line to prevent to cancel the create process when clicking in the button. It was used as string value to be grabbed by the provide and used by the function added within  [app-module](src/app/app.module.ts) called `checkDirtyState()`. Also it was created a variable to be checked if is to be canceled (isDirty). It prevents from navigating after saving unless to be set to false the flag dirty.
 
 ### [Resolver Service](src/app/events/event-list-resolver.service.ts) (observable - rxjs Subject)
 
@@ -27,7 +27,11 @@ After implemented this file, it was added to [app-module](src/app/app.module.ts)
 
 There are two options when creating form, template-based or model-based(called reactive forms). Template-based allows to build completely in HTML template, simple and easy, it works great for simple uses cases, but it has some limitations like when applied to complex forms, with a lot of logic, things like cross fiel validation are more difficult. Unit test is another limitation, so it's not possible  to use it in all form and validation logic. Model-based allow to build form and put a lot of logic in the component.
 
-[(NgModel)] (two way binding that is called banana) gives some extra forms-related functionality that can be used instead of simple (input) data binding which allows to be declared in a shortly way, saving to remember everywhere it is used. It is commonly used when the field edits existing data and as it is typed in the field, data is updated in the component. When there's no this need, it is enough to have one-way data binding (ngModel) and when using it, remember to declare it on the component. Another thing that handle extra things is (ngSubmit) like preventing the form from submitting to the server. It can receive just the data that is interesting and not all data that is available in the form, using the variable name dot value (loginForm.value), and in the method within the component, retrieve the form data the same way (formValues.username and formValues.password).
+[(NgModel)] (two way binding that is called banana) gives some extra forms-related functionality that can be used instead of simple (input) data binding which allows to be declared in a shortly way, saving to remember everywhere it is used. It is commonly used when the field edits existing data and as it is typed in the field, data is updated in the component. When there's no this need, it is enough to have one-way data binding (ngModel) and when using it, remember to declare it on the component. The name of the field is used to populate the form values and the ngModel is used for binding to properties to component.
+
+Another thing that handle extra things is (ngSubmit) like preventing the form from submitting to the server. It can receive just the data that is interesting and not all data that is available in the form, using the variable name dot value (loginForm.value), and in the method within the component, retrieve the form data the same way (formValues.username and formValues.password).
+
+NgModelGroup is used as a solution to present nested data like address, city and country within location key in the [event.model](src/app/events/shared/event.model.ts), which is applied in a div tag right before the Location div in the [create event html file](src/app/events/create-event.component.html) that takes the same name of this main field (location) and then the data that is sent now have subfields nested in the location key.
 
 ## Auth component
 
@@ -39,21 +43,20 @@ Login component is responsible to redirect after authentication is done or cance
 
 Validation in the html page is possible from the loginForm variable. To understand how it works, there's some methods that can be used as shown below. When clicked on username field, the touched property changes to true and when types something in there a buch of these values changed, like username.valid is true right after. 
 
-`
-  {{'loginForm.valid: ' + loginForm.valid}}<br/>
-  {{'loginForm.valid: ' + loginForm.invalid}}<br/>
-  {{'loginForm.valid: ' + loginForm.dirty}}<br/>
-  {{'loginForm.valid: ' + loginForm.pristine}}<br/>
-  {{'loginForm.valid: ' + loginForm.submitted}}<br/>
-  {{'loginForm.valid: ' + loginForm.touched}}<br/>
-  {{'loginForm.valid: ' + loginForm.untouched}}<br/>
+  			{{'loginForm.valid: ' + loginForm.valid}}<br/>
+  			{{'loginForm.valid: ' + loginForm.invalid}}<br/>
+  			{{'loginForm.valid: ' + loginForm.dirty}}<br/>
+  			{{'loginForm.valid: ' + loginForm.pristine}}<br/>
+  			{{'loginForm.valid: ' + loginForm.submitted}}<br/>
+  			{{'loginForm.valid: ' + loginForm.touched}}<br/>
+  			{{'loginForm.valid: ' + loginForm.untouched}}<br/>
 
-  {{'loginForm.controls.userName.valid: ' + loginForm.controls.userName.valid}}<br/>
-  {{'loginForm.controls.userName.invalid: ' + loginForm.controls.userName.invalid}}<br/>
-  {{'loginForm.controls.userName.dirty: ' + loginForm.controls.userName.dirty}}<br/>
-  {{'loginForm.controls.userName.pristine: ' + loginForm.controls.userName.pristine}}<br/>
-  {{'loginForm.controls.userName.touched: ' + loginForm.controls.userName.touched}}<br/>
-  {{'loginForm.controls.userName.untouched: ' + loginForm.controls.userName.untouched}}<br/>`
+  			{{'loginForm.controls.userName.valid: ' + loginForm.controls.userName.valid}}<br/>
+  			{{'loginForm.controls.userName.invalid: ' + loginForm.controls.userName.invalid}}<br/>
+ 			{{'loginForm.controls.userName.dirty: ' + loginForm.controls.userName.dirty}}<br/>
+  			{{'loginForm.controls.userName.pristine: ' + loginForm.controls.userName.pristine}}<br/>
+  			{{'loginForm.controls.userName.touched: ' + loginForm.controls.userName.touched}}<br/>
+  			{{'loginForm.controls.userName.untouched: ' + loginForm.controls.userName.untouched}}<br/>
   
 Taking advantage of this properties, it is possible to disable the button submit using Angular property [disable] when loginForm is invalid (loginForm.invalid). Also, the fields validation error message are just launched when 'touched' and button submit has mouseoverLogin property in (mouseenter) and (mouseleave) to trigger message when the user pass mouse over that button. 
 
@@ -69,7 +72,15 @@ In order to wire up the current user to the profile fields, it is necessary firs
 
 Save button requires to create a updateCurrentUser method to point and take changes to auth.service.
 
-The expression `&& profileForm.controls.firstName.errors` was used because there are two validators in firstName and both would be shown and this is a solution to the first validation, because it sets true when there is a required error and `&& profileForm.controls.firstName.errors.pattern` is used to the validation about if the user typed number or letter for the first character. For more about [Validators](https://angular.io/api/forms/Validators).
+The expression `&& profileForm.controls.firstName.errors` was used because there are two validators in firstName and both would be shown and this is a solution to the first validation, because it sets true when there is a required error and `&& profileForm.controls.firstName.errors.pattern` is used to the validation about if the user typed number or letter for the first character. For more about [Validators](https://angular.io/api/forms/Validators). The fields are being accessed by the form through controls because this fields (that are FormControl) are declared private in typescript file like in [profile component](src/app/user/profile.component.ts), but it is not really necessary, as in the [create session file](src/app/events/event-details/create-session.component.ts) becoming available in html template, allowing to access directly from the variable.
+
+## [Session component](src/app/events/event-details/create-session.component.ts)
+
+Map is used as a way to sanity check that the shape is being passed in is correct. 
+
+Dirty is used in the html template that is different than touched because, for instance, when putting the cursor into the field and then leave it, it's touched, not dirty, but if something is typed, it becomes dirty.
+
+
 
 ## Development server
 
