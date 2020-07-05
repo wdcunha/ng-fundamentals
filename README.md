@@ -90,16 +90,15 @@ To be reusable around the project, it was created a new file in the shared folde
 
 ## Passing data to child component
 
-Videos from pluralsight [chapter 8 Communicating between components](https://app.pluralsight.com/course-player?clipId=e01d7c86-ea20-4e42-aff9-7a45e9024c3b) teach how pass data. The [Event Detail](src/app/events/event-details/event-details.component.ts) was used as example about passing to a child component. There was a session data, but not used yet, so it was created a [session-list.component](src/app/events/event-details/session-list.component.ts) and used sessions property do bind:
+Videos from pluralsight [chapter 8 Communicating between components](https://app.pluralsight.com/course-player?clipId=e01d7c86-ea20-4e42-aff9-7a45e9024c3b) teach how pass data. The [Event Detail](src/app/events/event-details/event-details.component.ts) was used as example about passing to a child component. There was a session data, but not used yet, so it was created a [session-list.component](src/app/events/event-details/session-list.component.ts) and used sessions property to bind:
 
             `  <session-list [sessions]="event?.sessions"></session-list>`
 
 ## Passing data to parent component
 
-Videos from pluralsight [chapter 8 Communicating between components](https://app.pluralsight.com/course-player?clipId=e01d7c86-ea20-4e42-aff9-7a45e9024c3b) teach how pass data. The [Event Detail](src/app/events/event-details/event-details.component.ts) was used as example about passing to a child component. There was a session data, but not used yet, so it was created a [session-list.component](src/app/events/event-details/session-list.component.ts) and used sessions property do bind:
+To apply an example, it was used the [Event Detail](src/app/events/event-details/event-details.component.ts). A div was added to show a button to make visible the tags for session-list as default vision and when addMode is true, then create-session form will be shown. In order to make the form add content to the correspondent event, that is in the same screen it appears, and to show a subcomponent passing data to its parente, it was added an @Output property that is EventEmitter that will bind to event details page, putting a method for it (that has ISession type parameter) within the create-session at [Event Detail html](src/app/events/event-details/event-details.component.html). A new method has been created in the event.service, it has to find the existing event () and then updates it with the new session.
 
-            `  <session-list [sessions]="event?.sessions"></session-list>`
-
+Cancel button also need to have an emit method, then an @Output property was needed and a cancel method within create-session.component and wired up in the html file. So in the event-detais.component.html it is necessary to bind inside the create-session tag with a new method to turn addMode to false. That is an example how to use output parameters to pass data back to parent components.
 
 ## Development server
 
