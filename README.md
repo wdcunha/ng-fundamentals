@@ -80,6 +80,25 @@ Map is used as a way to sanity check that the shape is being passed in is correc
 
 Dirty is used in the html template that is different than touched because, for instance, when putting the cursor into the field and then leave it, it's touched, not dirty, but if something is typed, it becomes dirty.
 
+## [Custom Validator](https://app.pluralsight.com/player?course=angular-fundamentals&author=jim-cooper&name=angular-fundamentals-m6&clip=11&mode=live) 
+
+It was created a sample function that returns a basic Javascript object `{[key: string]: any}` (doesn't matter what kind object returns) that will make restricted some words. It consists in form control check if contains one of the restricted words. Then, this function was put in the Abstract field rule in the OnInit. So basically it turns red the field as soon as we type the word(s) restricted. Also this function was added as an error more calling the new function `restrictedWords` in the OnInit within [Create-session](src/app/events/event-details/create-session.component.ts) that check the restricted word typed. But the best way to pass the restricted words is like parameter within the function call, in this case in the OnInit.
+
+In order to make it to work like a function and receive parameter, some changes was necessary, making it a arrow function from ES6 with some TypeScript, that returns a function that is the validator itself. But to have access to the parameter words from inside the inner function is a little bit more complex. A map was included to loop over all the keywords to check the controls value to see if includes that word and after needs to filter out null values if exists. So if some invalid words exists, it will be returned and joined with the other and separated by comma to be shown above the html field to the user. 
+
+To be reusable around the project, it was created a new file in the shared folder [restricted-words.validator file](src/app/events/shared/restricted-words.validator.ts),Its path was put in the index located in the same directory.
+
+## Passing data to child component
+
+Videos from pluralsight [chapter 8 Communicating between components](https://app.pluralsight.com/course-player?clipId=e01d7c86-ea20-4e42-aff9-7a45e9024c3b) teach how pass data. The [Event Detail](src/app/events/event-details/event-details.component.ts) was used as example about passing to a child component. There was a session data, but not used yet, so it was created a [session-list.component](src/app/events/event-details/session-list.component.ts) and used sessions property do bind:
+
+            `  <session-list [sessions]="event?.sessions"></session-list>`
+
+## Passing data to parent component
+
+Videos from pluralsight [chapter 8 Communicating between components](https://app.pluralsight.com/course-player?clipId=e01d7c86-ea20-4e42-aff9-7a45e9024c3b) teach how pass data. The [Event Detail](src/app/events/event-details/event-details.component.ts) was used as example about passing to a child component. There was a session data, but not used yet, so it was created a [session-list.component](src/app/events/event-details/session-list.component.ts) and used sessions property do bind:
+
+            `  <session-list [sessions]="event?.sessions"></session-list>`
 
 
 ## Development server
