@@ -100,9 +100,13 @@ To apply an example, it was used the [Event Detail](src/app/events/event-details
 
 Cancel button also need to have an emit method, then an @Output property was needed and a cancel method within create-session.component and wired up in the html file. So in the event-detais.component.html it is necessary to bind inside the create-session tag with a new method to turn addMode to false. That is an example how to use output parameters to pass data back to parent components.
 
+## Reusing Components with Content Projection
+
+Colapse and expand session is the first example, hiding details and keeping just title with a simple click. Ng-content was used to allow Angular to know which content is inside component tags in another place and take control of it.
+
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+First example is to colapse/
 
 ## Code scaffolding
 
