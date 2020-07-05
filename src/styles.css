@@ -16,6 +16,10 @@
   cursor: pointer;
 }
 
+.well-radius {
+  border-radius: 15px;
+}
+
 button {
   color: #555;
 }

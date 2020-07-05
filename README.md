@@ -100,15 +100,17 @@ To apply an example, it was used the [Event Detail](src/app/events/event-details
 
 Cancel button also need to have an emit method, then an @Output property was needed and a cancel method within create-session.component and wired up in the html file. So in the event-detais.component.html it is necessary to bind inside the create-session tag with a new method to turn addMode to false. That is an example how to use output parameters to pass data back to parent components.
 
-## Reusing Components with Content Projection
+## Reusing Components with [Content Projection - chapter 9](https://app.pluralsight.com/course-player?clipId=24c9c05f-d58b-471d-8751-1ac42febb115)
 
 **Colapse and expand** session is the first example, hiding details and keeping just title with a simple click, [collapsible-well](src/app/common/collapsible-well.component.ts). Ng-content was used to allow Angular to know which content is inside component tags in another place and take control of it.
 
-**Multiple slot** consists in having areas within the component, for instance, the title and body tags added to collapsible-well, using ng-content tag for each one of this in the collapsible-well.component. It will allow to apply a different format and logic for each area. Title and body tags was changed to div's tags with correspondent name for class and each one of them will be shown in one of ng-content created here and Angular will match up automatically based on classes name. Aiming to avoid some conflict around the project because of the class names (title and body), they were changed to `well-title` and `well-body`, demanding that it be put inside square brackets at the collapsible-well.component html template.
+**Multiple slot** consists in having areas within the component, for instance, the title and body tags added to collapsible-well, using ng-content tag for each one of this in the collapsible-well.component. It will allow to apply a different format and logic for each area. Title and body tags was changed to div's tags with the correspondent name for class and each one of them will be shown in one of ng-content created here and Angular will match up automatically based on classes name. Aiming to avoid some conflict around the project because of the class names (title and body), they were changed to `well-title` and `well-body`, demanding that it be put inside square brackets at the collapsible-well.component html template.
 
-## Development server
+## Filtering and Sorting Data [chapter 10 pluralsight](https://app.pluralsight.com/course-player?clipId=975fa7d3-2439-4263-8b02-11388ed041cc)
 
-First example is to colapse/
+There's no pipe in Angular for this task, so it is necessary to create one for this. Identity and mutability are critical things when treating about this theme and the major reason is around performance problems. Objects and arrays are mutable and can change any time without changing their identity. Data maybe change anytime and the logic needs to verify if there was some modification inside data and this kind of operation can be a rather expensive.
+
+String, number and date have own pipe and it works great because comparing an identity is so quick. But when filtering and sorting, the source will be objects, so the identity isn't going to change and pipe isn't going to be rerun, therefore the display isn't going to get updated. There's another option that is __Impure Pipe__. It runs on every change detection engine cycle and it is a problem because that means the sorting or filtering operation will now run unnecessarily every time an event happens in the application and the results have to be rerendered to the DOM. Like this, pipe is not recommended for this kind of operation, but do it ourselves, only updating when source data changes, since the code has to actualy change the data.
 
 ## Code scaffolding
 

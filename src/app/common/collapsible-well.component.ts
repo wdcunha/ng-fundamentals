@@ -10,13 +10,7 @@ import {Component, Input} from '@angular/core';
       </h4>
       <ng-content *ngIf="visible" select="[well-body]"></ng-content>
     </div>
-  `,
-  styles: [`
-    .well-radius {
-      border-radius: 15px;
-    }
-  `]
-
+  `
 })
 export class CollapsibleWellComponent {
   visible = true;

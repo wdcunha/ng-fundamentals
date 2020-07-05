@@ -4,9 +4,9 @@ import { IEvent } from './shared/index';
 @Component({
   selector: 'event-thumbnail',
   template: `
-    <div class="well hoverwell thumbnail" [routerLink]="['/events', event.id]">
-    <h2>{{event?.name}}</h2>
-    <div>Date: {{event?.date}}</div>
+    <div class="well hoverwell thumbnail well-radius" [routerLink]="['/events', event.id]">
+    <h2>{{event?.name | uppercase}}</h2>
+    <div>Date: {{event?.date | date}}</div>
 <!--      <div class="well" [ngStyle]="{'color': event?.time === '8:00 am' ?-->
 <!--        '#003300' : '#bbb', 'font-weight': event?.time === '8:00 am' ?-->
 <!--        'bold' : 'normal'}" [ngSwitch]="event?.time">-->
@@ -17,7 +17,7 @@ import { IEvent } from './shared/index';
       <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
       <span *ngSwitchDefault>(Normal Start)</span>
     </div>
-    <div>Price: \${{event?.price}}</div>
+    <div>Price: {{event?.price | currency: 'EUR'}}</div>
     <div [hidden]="!event?.location">
       <span>Location: {{event?.location?.address}}</span>
 <!--      <span>&nbsp;</span>-->
