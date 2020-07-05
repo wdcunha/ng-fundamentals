@@ -9,4 +9,7 @@ import {ISession} from '../shared';
 export class SessionListComponent {
   @Input()
   sessions: ISession[];
+
+  @Input()
+  filterBy: string;
 }

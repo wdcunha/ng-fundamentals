@@ -112,6 +112,8 @@ There's no pipe in Angular for this task, so it is necessary to create one for t
 
 String, number and date have own pipe and it works great because comparing an identity is so quick. But when filtering and sorting, the source will be objects, so the identity isn't going to change and pipe isn't going to be rerun, therefore the display isn't going to get updated. There's another option that is __Impure Pipe__. It runs on every change detection engine cycle and it is a problem because that means the sorting or filtering operation will now run unnecessarily every time an event happens in the application and the results have to be rerendered to the DOM. Like this, pipe is not recommended for this kind of operation, but do it ourselves, only updating when source data changes, since the code has to actualy change the data.
 
+Then to examplify filtering display, Sessions was used because it has level. A button was added to Event-details and [class.active] used to define which button is active and it activated when the field filterBy is equal to one of the existing options selected by clicking to the button and something interesting is that the click property receives the value when clicked and not calls a method as usual. After that, sessions needs to receive this values, creating a new property binding in session-list tag in event-details.component called 
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
