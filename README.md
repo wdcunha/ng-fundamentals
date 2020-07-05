@@ -102,7 +102,9 @@ Cancel button also need to have an emit method, then an @Output property was nee
 
 ## Reusing Components with Content Projection
 
-Colapse and expand session is the first example, hiding details and keeping just title with a simple click. Ng-content was used to allow Angular to know which content is inside component tags in another place and take control of it.
+**Colapse and expand** session is the first example, hiding details and keeping just title with a simple click, [collapsible-well](src/app/common/collapsible-well.component.ts). Ng-content was used to allow Angular to know which content is inside component tags in another place and take control of it.
+
+**Multiple slot** consists in having areas within the component, for instance, the title and body tags added to collapsible-well, using ng-content tag for each one of this in the collapsible-well.component. It will allow to apply a different format and logic for each area. Title and body tags was changed to div's tags with correspondent name for class and each one of them will be shown in one of ng-content created here and Angular will match up automatically based on classes name. Aiming to avoid some conflict around the project because of the class names (title and body), they were changed to `well-title` and `well-body`, demanding that it be put inside square brackets at the collapsible-well.component html template.
 
 ## Development server
 
