@@ -16,6 +16,7 @@ export class EventDetailsComponent implements OnInit {
   event: IEvent;
   addMode: boolean;
   filterBy = 'all'; // it will switch at a certain point to one of the other options
+  sortBy = 'votes';
 
   constructor(
     private eventService: EventService,

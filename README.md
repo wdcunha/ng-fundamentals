@@ -112,7 +112,26 @@ There's no pipe in Angular for this task, so it is necessary to create one for t
 
 String, number and date have own pipe and it works great because comparing an identity is so quick. But when filtering and sorting, the source will be objects, so the identity isn't going to change and pipe isn't going to be rerun, therefore the display isn't going to get updated. There's another option that is __Impure Pipe__. It runs on every change detection engine cycle and it is a problem because that means the sorting or filtering operation will now run unnecessarily every time an event happens in the application and the results have to be rerendered to the DOM. Like this, pipe is not recommended for this kind of operation, but do it ourselves, only updating when source data changes, since the code has to actualy change the data.
 
-Then to examplify filtering display, Sessions was used because it has level. A button was added to Event-details and [class.active] used to define which button is active and it activated when the field filterBy is equal to one of the existing options selected by clicking to the button and something interesting is that the click property receives the value when clicked and not calls a method as usual. After that, sessions needs to receive this values, creating a new property binding in session-list tag in event-details.component called 
+Then to exemplify filtering display, Sessions was used because it has level. A button was added to Event-details and [class.active] used to define which button is active, and it activated when the field filterBy is equal to one of the existing options selected by clicking to the button and something interesting is that the click property receives the value when clicked and not calls a method as usual. After that, sessions needs to receive this values, creating a new property binding in session-list tag in event-details.component called [filterBy], that was declared in a @Input property. So when passing value into this property, it is needed to take action in order to change what sessions are being showed, and OnChanges is the place where it was put and created a method to filter sessions. 
+
+A new ISession[] variable was created to receive the sessions that are filtered, this way it was put in the place of sessions variable in html file. In order to clone the entire array, a quick way is to use slice it from the very first element with all the same elements `this.visibleSessions = this.sessions.slice(0)`. In the else clause, creates a subset of the array using the method filter which creates a brand-new array and pass a little lambda, returning level (field of ISession) in toLocaleLowerCase (Converts all alphabetic characters to lowercase, taking into account the host environment's current locale), in which the filter parameter is used to set the argument comparison: `session.level.toLocaleLowerCase() === filter`. 
+
+## Sorting Data [chapter 10 pluralsight](https://app.pluralsight.com/course-player?clipId=cb7b52c0-1247-407b-a132-937845edd096)
+
+Sorting is also applied to [session-list.component](src/app/events/event-details/session-list.component.ts), which order by votes and the other by the name, either by name in alphabetical order or by highest-voted.to see the highest-voted. The same way in filtering, it was put in session-list tag in [Event Detail html](src/app/events/event-details/event-details.component.html) the property [sortBy], and created both in event-details and session-list. Also it was put in Onchanges. For this, array has the method sorting that is good to use in this case that creates a new copy of the array and leave the original unsorted, sorting in place, but it is necessary to create a new comparison function. There were created two functions (sortByVotesDesc and sortByNameAsc) outside of the class scope, right below curly braces at the at of the file, and they are stateless functions, so don't need to be a method of the class. The function sortByVotesDesc has 2 parameters of ISession type, in which has to be compared.
+
+For sortByNameAsc function was implemented the logic below, in wich the last else return -1 meaning the second session is before the first. It compares any given two values and tells the array's sorting method how those two values should be in relationship to each other
+
+            > `  if (firstSession.name > secondSession.name) { return 1; }
+                 else if (firstSession.name === secondSession.name) { return 0; }
+                 else { return -1; }`
+
+For sortByVotesDesc function the logic is kind the similar, but the voter is an array, so each session has a voter array and its length property is the number of votes, which allows easily compare two different sessions number of votes by subtracting them and since it is descending sort, it is seconde minus first. So if they are equal numbers, the result will be zero, if the second is bigger number, the result will be positive and finally if the first is bigger, the result will be negative. 
+
+            > `  secondSession.voters.length - firstSession.voters.length`
+
+
+
 
 ## Code scaffolding
 

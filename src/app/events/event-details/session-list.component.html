@@ -1,9 +1,9 @@
-<div class="row well-radius" *ngFor="let session of sessions">
+<div class="row well-radius" *ngFor="let session of visibleSessions">
   <div class="col-md-10">
     <collapsible-well>
       <div well-title>
         {{session.name | uppercase}}
-        <i *ngIf="session.voters.length > 3" class="glyphicon glyphicon-fire" style="color: orange"></i>
+        <i *ngIf="session.voters.length > 3" class="glyphicon glyphicon-fire" style="color: darkred"></i>
       </div>
       <div well-body>
         <h6>{{session.presenter}}</h6>
