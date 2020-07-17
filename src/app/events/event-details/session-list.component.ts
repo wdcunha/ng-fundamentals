@@ -34,7 +34,6 @@ export class SessionListComponent implements OnChanges {
   }
 }
 
-
 function sortByNameAsc(firstSession: ISession, secondSession: ISession) {
   if (firstSession.name > secondSession.name) { return 1; }
   else if (firstSession.name === secondSession.name) { return 0; }

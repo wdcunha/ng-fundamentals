@@ -25,9 +25,9 @@ After implemented this file, it was added to [app-module](src/app/app.module.ts)
 
 ## Forms
 
-There are two options when creating form, template-based or model-based(called reactive forms). Template-based allows to build completely in HTML template, simple and easy, it works great for simple uses cases, but it has some limitations like when applied to complex forms, with a lot of logic, things like cross fiel validation are more difficult. Unit test is another limitation, so it's not possible  to use it in all form and validation logic. Model-based allow to build form and put a lot of logic in the component.
+There are two options when creating form, template-based or model-based(called reactive forms). Template-based allows to build completely in HTML template, simple and easy, it works great for simple uses cases, but it has some limitations like when applied to complex forms, with a lot of logic, things like cross field validation are more difficult. Unit test is another limitation, so it's not possible  to use it in all form and validation logic. Model-based allow building form and put a lot of logic in the component.
 
-[(NgModel)] (two way binding that is called banana) gives some extra forms-related functionality that can be used instead of simple (input) data binding which allows to be declared in a shortly way, saving to remember everywhere it is used. It is commonly used when the field edits existing data and as it is typed in the field, data is updated in the component. When there's no this need, it is enough to have one-way data binding (ngModel) and when using it, remember to declare it on the component. The name of the field is used to populate the form values and the ngModel is used for binding to properties to component.
+[(NgModel)] (two way binding that is called banana) gives some extra forms-related functionality that can be used instead of simple (input) data binding which allows to be declared in a short way, saving to remember everywhere it is used. It is commonly used when the field edits existing data and as it is typed in the field, data is updated in the component. When there's no this need, it is enough to have one-way data binding (ngModel) and when using it, remember to declare it on the component. The name of the field is used to populate the form values and the ngModel is used for binding to properties to component.
 
 Another thing that handle extra things is (ngSubmit) like preventing the form from submitting to the server. It can receive just the data that is interesting and not all data that is available in the form, using the variable name dot value (loginForm.value), and in the method within the component, retrieve the form data the same way (formValues.username and formValues.password).
 
@@ -122,13 +122,13 @@ Sorting is also applied to [session-list.component](src/app/events/event-details
 
 For sortByNameAsc function was implemented the logic below, in wich the last else return -1 meaning the second session is before the first. It compares any given two values and tells the array's sorting method how those two values should be in relationship to each other
 
-            > `  if (firstSession.name > secondSession.name) { return 1; }
-                 else if (firstSession.name === secondSession.name) { return 0; }
-                 else { return -1; }`
+            > `if (firstSession.name > secondSession.name) { return 1; }
+               else if (firstSession.name === secondSession.name) { return 0; }
+               else { return -1; }`
 
 For sortByVotesDesc function the logic is kind the similar, but the voter is an array, so each session has a voter array and its length property is the number of votes, which allows easily compare two different sessions number of votes by subtracting them and since it is descending sort, it is seconde minus first. So if they are equal numbers, the result will be zero, if the second is bigger number, the result will be positive and finally if the first is bigger, the result will be negative. 
 
-            > `  secondSession.voters.length - firstSession.voters.length`
+            > `secondSession.voters.length - firstSession.voters.length`
 
 
 
